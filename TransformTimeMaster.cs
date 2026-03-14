@@ -6,27 +6,32 @@ using UnityEngine;
 
 namespace TimeMaster;
 
+/// <summary>
+/// Keeps the Time Master model tilted at the correct angle when a custom
+/// 3-D asset-bundle display is used.  Attach via
+/// <c>gameObject.AddComponent&lt;TransformTimeMaster&gt;()</c> from the
+/// display-factory hook.
+/// </summary>
 [RegisterTypeInIl2Cpp]
 public class TransformTimeMaster : MonoBehaviour
 {
-	public TransformTimeMaster(IntPtr obj0)
-		: base(obj0)
-	{
-		ClassInjector.DerivedConstructorBody((Il2CppObjectBase)(object)this);
-	}
+    // Il2Cpp interop constructors – required boilerplate
+    public TransformTimeMaster(IntPtr obj0)
+        : base(obj0)
+    {
+        ClassInjector.DerivedConstructorBody((Il2CppObjectBase)(object)this);
+    }
 
-	public TransformTimeMaster()
-		: base(ClassInjector.DerivedConstructorPointer<TransformTimeMaster>())
-	{
-	}
+    public TransformTimeMaster()
+        : base(ClassInjector.DerivedConstructorPointer<TransformTimeMaster>())
+    {
+    }
 
-	public void Update()
-	{
-		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001e: Unknown result type (might be due to invalid IL or missing references)
-		Vector3 eulerAngles = ((Component)this).transform.eulerAngles;
-		eulerAngles.x = 345f;
-		((Component)this).transform.eulerAngles = eulerAngles;
-	}
+    public void Update()
+    {
+        // Lock the X-rotation so the model always faces the right direction
+        Vector3 angles = transform.eulerAngles;
+        angles.x = 345f;
+        transform.eulerAngles = angles;
+    }
 }
